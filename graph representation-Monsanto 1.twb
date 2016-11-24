@@ -1,0 +1,308 @@
+<?xml version='1.0' encoding='utf-8' ?>
+
+<!-- build 9200.15.1201.0018                                -->
+<workbook source-platform='mac' version='9.2' xmlns:user='http://www.tableausoftware.com/xml/user'>
+  <preferences>
+    <preference name='ui.encoding.shelf.height' value='24' />
+    <preference name='ui.shelf.height' value='26' />
+  </preferences>
+  <datasources>
+    <datasource caption='output' inline='true' name='textscan.1vuq9lf02je3fq14nctmg0a95slk' version='9.2'>
+      <connection class='textscan' directory='/Users/Kanika/Desktop/Monsanto' filename='output.csv' password='' server='' username=''>
+        <relation name='output#csv' table='[output#csv]' type='table'>
+          <columns character-set='UTF-8' header='yes' locale='en_US' separator=','>
+            <column datatype='string' name='position' ordinal='0' />
+            <column datatype='string' name='player name' ordinal='1' />
+            <column datatype='real' name='win score' ordinal='2' />
+          </columns>
+        </relation>
+        <metadata-records>
+          <metadata-record class='column'>
+            <remote-name>position</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[position]</local-name>
+            <parent-name>[output#csv]</parent-name>
+            <remote-alias>position</remote-alias>
+            <ordinal>0</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteCollation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;heap&quot;</attribute>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4294967292</attribute>
+              <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;str&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>player name</remote-name>
+            <remote-type>129</remote-type>
+            <local-name>[player name]</local-name>
+            <parent-name>[output#csv]</parent-name>
+            <remote-alias>player name</remote-alias>
+            <ordinal>1</ordinal>
+            <local-type>string</local-type>
+            <aggregation>Count</aggregation>
+            <scale>1</scale>
+            <width>1073741823</width>
+            <contains-null>true</contains-null>
+            <collation flag='0' name='LEN_RUS' />
+            <attributes>
+              <attribute datatype='string' name='DebugRemoteCollation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='DebugRemoteMetadata (compression)'>&quot;heap&quot;</attribute>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>4294967292</attribute>
+              <attribute datatype='integer' name='DebugRemoteMetadata (storagewidth)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;str&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='column'>
+            <remote-name>win score</remote-name>
+            <remote-type>5</remote-type>
+            <local-name>[win score]</local-name>
+            <parent-name>[output#csv]</parent-name>
+            <remote-alias>win score</remote-alias>
+            <ordinal>2</ordinal>
+            <local-type>real</local-type>
+            <aggregation>Sum</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='integer' name='DebugRemoteMetadata (size)'>8</attribute>
+              <attribute datatype='string' name='DebugRemoteType'>&quot;double&quot;</attribute>
+            </attributes>
+          </metadata-record>
+          <metadata-record class='capability'>
+            <remote-name />
+            <remote-type>0</remote-type>
+            <parent-name>[output#csv]</parent-name>
+            <remote-alias />
+            <aggregation>Count</aggregation>
+            <contains-null>true</contains-null>
+            <attributes>
+              <attribute datatype='string' name='character-set'>&quot;UTF-8&quot;</attribute>
+              <attribute datatype='string' name='collation'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='field-delimiter'>&quot;,&quot;</attribute>
+              <attribute datatype='string' name='header-row'>&quot;true&quot;</attribute>
+              <attribute datatype='string' name='locale'>&quot;en_US&quot;</attribute>
+              <attribute datatype='string' name='single-char'>&quot;&quot;</attribute>
+            </attributes>
+          </metadata-record>
+        </metadata-records>
+      </connection>
+      <aliases enabled='yes' />
+      <column datatype='integer' name='[Number of Records]' role='measure' type='quantitative' user:auto-column='numrec'>
+        <calculation class='tableau' formula='1' />
+      </column>
+      <column caption='Player Name' datatype='string' name='[player name]' role='dimension' type='nominal' />
+      <column caption='Position' datatype='string' name='[position]' role='dimension' type='nominal' />
+      <column caption='Win Score' datatype='real' name='[win score]' role='measure' type='quantitative' />
+      <layout dim-ordering='alphabetic' dim-percentage='0.501389' measure-ordering='alphabetic' measure-percentage='0.498611' show-structure='true' />
+      <semantic-values>
+        <semantic-value key='[Country].[Name]' value='&quot;United States&quot;' />
+      </semantic-values>
+    </datasource>
+  </datasources>
+  <worksheets>
+    <worksheet name='Sheet 1'>
+      <table>
+        <view>
+          <datasources>
+            <datasource caption='output' name='textscan.1vuq9lf02je3fq14nctmg0a95slk' />
+          </datasources>
+          <datasource-dependencies datasource='textscan.1vuq9lf02je3fq14nctmg0a95slk'>
+            <column-instance column='[player name]' derivation='None' name='[none:player name:nk]' pivot='key' type='nominal' />
+            <column-instance column='[position]' derivation='None' name='[none:position:nk]' pivot='key' type='nominal' />
+            <column caption='Player Name' datatype='string' name='[player name]' role='dimension' type='nominal' />
+            <column caption='Position' datatype='string' name='[position]' role='dimension' type='nominal' />
+            <column-instance column='[win score]' derivation='Sum' name='[sum:win score:qk]' pivot='key' type='quantitative' />
+            <column caption='Win Score' datatype='real' name='[win score]' role='measure' type='quantitative' />
+          </datasource-dependencies>
+          <aggregation value='true' />
+        </view>
+        <style>
+          <style-rule element='mark'>
+            <encoding attr='size-bar' field='[textscan.1vuq9lf02je3fq14nctmg0a95slk].[sum:win score:qk]' field-type='quantitative' max-size='1' min-size='0.005' type='centersize' />
+          </style-rule>
+        </style>
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+            <encodings>
+              <color column='[textscan.1vuq9lf02je3fq14nctmg0a95slk].[none:player name:nk]' />
+            </encodings>
+          </pane>
+        </panes>
+        <rows>[textscan.1vuq9lf02je3fq14nctmg0a95slk].[sum:win score:qk]</rows>
+        <cols>([textscan.1vuq9lf02je3fq14nctmg0a95slk].[none:position:nk] / [textscan.1vuq9lf02je3fq14nctmg0a95slk].[none:player name:nk])</cols>
+      </table>
+    </worksheet>
+    <worksheet name='Sheet 2'>
+      <table>
+        <view>
+          <datasources />
+          <aggregation value='true' />
+        </view>
+        <style />
+        <panes>
+          <pane>
+            <view>
+              <breakdown value='auto' />
+            </view>
+            <mark class='Automatic' />
+          </pane>
+        </panes>
+        <rows />
+        <cols />
+      </table>
+    </worksheet>
+  </worksheets>
+  <windows source-height='28'>
+    <window class='worksheet' maximized='true' name='Sheet 1'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+            <card pane-specification-id='0' param='[textscan.1vuq9lf02je3fq14nctmg0a95slk].[none:player name:nk]' type='color' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+        </edge>
+      </cards>
+      <viewpoint>
+        <highlight>
+          <color-one-way>
+            <field>[textscan.1vuq9lf02je3fq14nctmg0a95slk].[:Measure Names]</field>
+            <field>[textscan.1vuq9lf02je3fq14nctmg0a95slk].[none:player name:nk]</field>
+            <field>[textscan.1vuq9lf02je3fq14nctmg0a95slk].[none:position:nk]</field>
+          </color-one-way>
+        </highlight>
+      </viewpoint>
+    </window>
+    <window class='worksheet' name='Sheet 2'>
+      <cards>
+        <edge name='left'>
+          <strip size='160'>
+            <card type='pages' />
+            <card type='filters' />
+            <card type='marks' />
+          </strip>
+        </edge>
+        <edge name='top'>
+          <strip size='2147483647'>
+            <card type='columns' />
+          </strip>
+          <strip size='2147483647'>
+            <card type='rows' />
+          </strip>
+        </edge>
+      </cards>
+    </window>
+  </windows>
+  <thumbnails>
+    <thumbnail height='192' name='Sheet 1' width='192'>
+      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
+      AAAASUVORK5CYII=
+    </thumbnail>
+    <thumbnail height='144' name='Sheet 2' width='174'>
+      iVBORw0KGgoAAAANSUhEUgAAAK4AAACQCAYAAACRfFAzAAAACXBIWXMAAA7DAAAOwwHHb6hk
+      AAABmUlEQVR4nO3SQQ0AIBDAMMC/58MDH7KkVbDH9szMgpjzOwBeGJck45JkXJKMS5JxSTIu
+      ScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45Jk
+      XJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYl
+      ybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKM
+      S5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgk
+      GZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5Jx
+      STIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuScYlybgkGZck
+      45JkXJKMS5JxSTIuScYlybgkGZck45JkXJKMS5JxSTIuSRePYgUc7kJNEQAAAABJRU5ErkJg
+      gg==
+    </thumbnail>
+  </thumbnails>
+</workbook>

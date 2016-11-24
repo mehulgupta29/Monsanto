@@ -1,21 +1,21 @@
-"""
-a script to determine the player with the best Win Score per game by position
-Win score formula:
-	Win Score =[(Points)+(Rebounds)+(Steals)+(½Assists)+(½Blocked Shots)-(Field Goal Attempts)-(Turnovers)-½(Free Throw Attempts)]/Games
-	Field Goal Attempts = (((PTS - 3*THREES)*0.45)/FG
-	Free Throw Attempts = (((PTS - 3*THREES)*0.1)/FT
-"""
-import urllib.request as ulr
+
+#import urllib.request as ulr
+#import urllib2 as ulr
+import requests as r
 import xmltodict
 from operator import itemgetter
+import json
+import csv
 
 def fetchData(url):
+	"""
+	"""
 	#make a new browser, this will download pages from the web for us. This is done by calling the 
 	#build_opener() method from the urllib2 library
-	browser=ulr.build_opener()
+	#browser=ulr.build_opener()
 
 	#desguise the browser, so that websites think it is an actual browser running on a computer
-	browser.addheaders=[('User-agent', 'Mozilla/5.0')]
+	#browser.addheaders=[('User-agent', 'Safari/537.36')]
 
 	success=False# become True when we get the file
 
@@ -23,7 +23,8 @@ def fetchData(url):
 
 		try:
 			#use the browser to access the url
-			response=browser.open(url)    
+			#response=browser.open(url)    
+			response=r.get(url)
 			success=True # success
 			break # we got the file, break the loop
 		except:# browser.open() threw an exception, the attempt to get the response failed
@@ -32,10 +33,12 @@ def fetchData(url):
 	# all five attempts failed, return  None
 	if not success: return None
 
-	fbaDraftProjections=response.read()
+	fbaDraftProjections=response.text
 	return fbaDraftProjections	
 
 def convertXMLToPY(xmlData):
+	"""
+	"""
 	pyData=[]
 	tempdict=dict(xmltodict.parse(xmlData)['FantasyBasketballNerd'])
 	for d in tempdict['Player']:
@@ -44,6 +47,8 @@ def convertXMLToPY(xmlData):
 	return pyData
 
 def calculateWinScore(PTS, REB, STL, AST, BLK, THREES, FG, TO, FT, GAMES):
+	"""
+	"""
 	FGA=(((PTS - 3*THREES)*0.45)/FG)
 	FTA=(((PTS - 3*THREES)*0.1)/FT)
 	WS=((PTS)+(REB)+(STL)+(0.5*AST)+(0.5*BLK)-(FGA)-(TO)-(0.5*FTA))/GAMES
@@ -74,6 +79,8 @@ def computeWinScore(fbaList):
 	return byPositions,playerNamesDict
 
 def getPlayerName(pid, playerNamesDict):
+	"""
+	"""
 	return playerNamesDict[pid]
 
 
@@ -95,14 +102,50 @@ def findTopPlayerByPosition(byPositions, playerNamesDict):
 	return results
 
 def getAllPositions(fbaList):
+	"""
+	"""
 	result=[]
 	for fba in fbaList:
 		if fba['position'] not in result:
 			result.append(fba['position'])
 	print(result)
 
+
+def convertToCSV(fname, data):
+	"""
+		convert a python list to csv and write it to a file
+	"""
+	key=[]
+	f = csv.writer(open(fname, "w"))
+	
+	#Write CSV Header, If you dont need that, remove this line
+	key.append('position')
+	key.append('player name')
+	key.append('win score')
+	f.writerow(key)
+
+	#Write the data to csv
+	for pos, value in data.items():
+		res=[]
+		res.append(pos)
+		res.append(value[0])
+		res.append(value[1])
+		f.writerow(res)
+	print(fname, "successfully created")
+
+def writeToFile(fname, data):
+	"""
+	"""
+
+	data=json.dumps(data)
+	fw=open(fname, 'w')
+	fw.write(data)
+	fw.close()
+
+
 def run(url): 
 	"""
+
 	variables:
 		fbaDraftProjections: text
 		fbaList=[{'name': playerName, 'playerId': pid, ..}, ...]
@@ -110,16 +153,22 @@ def run(url):
 		results={position: (playerName, winscore), ...}
 	"""
 	fbaDraftProjections=fetchData(url)
-	fbaList=convertXMLToPY(fbaDraftProjections)
-	results,playerNamesDict=computeWinScore(fbaList)
-	results=findTopPlayerByPosition(results, playerNamesDict)
-	print(results)
+	if fbaDraftProjections != None:
+		print("Fetch Successful")
+		fbaList=convertXMLToPY(fbaDraftProjections)
+		results,playerNamesDict=computeWinScore(fbaList)
+		results=findTopPlayerByPosition(results, playerNamesDict)
+		print(results)
+
+		#writeToFile('output.json', results)
+		convertToCSV('output.csv', results)
+	else:
+		print("Error")
 
 	#getAllPositions(fbaList)
 	
 
 if __name__=='__main__':
 	run('https://www.fantasybasketballnerd.com/service/draft-projections')
-	
 
 	
